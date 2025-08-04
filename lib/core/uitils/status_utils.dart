@@ -1,0 +1,1 @@
+enum StatusUtils {loading,success,error,none}
