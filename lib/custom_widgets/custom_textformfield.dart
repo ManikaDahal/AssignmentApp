@@ -1,64 +1,56 @@
-
 import 'package:flutter/material.dart';
-import 'package:project_1/core/uitils/color_uitils.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextformfield extends StatelessWidget {
   final Function(String)? onChanged;
+  final String? Function(String?)? validator;
   final String? labelText;
   final String? hintText;
+  final Icon? prefixIcon;
   final Widget? suffixIcon;
-  final Widget? prefixIcon;
-  final bool? obscureText;
+  final bool obscureText;
   final TextInputType? keyboardType;
+  final InputDecoration? decoration;
+  final List<TextInputFormatter>? inputFormatters;
   final TextEditingController? controller;
-  final String? Function(String?)? validator;
 
   const CustomTextformfield({
-    super.key,
-    this.labelText,
+    Key? key,
     this.onChanged,
-    this.hintText,
-    this.suffixIcon,
-    this.prefixIcon,
-    this.obscureText,
-    this.keyboardType,
-    this.controller,
     this.validator,
-  });
+    this.labelText,
+    this.hintText,
+    this.obscureText = false,
+    this.decoration,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.keyboardType,
+    this.inputFormatters,
+    this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (labelText != null) ...[
-            Text(
-              labelText!,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-            const SizedBox(height: 5),
-          ],
-          TextFormField(
-            onChanged: onChanged,
-            controller: controller,
-            keyboardType: keyboardType ?? TextInputType.text,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: validator,
-            obscureText: obscureText ?? false,
-            decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle: const TextStyle(color: blackColor),
-              alignLabelWithHint: true,
-              suffixIcon: suffixIcon,
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: TextFormField(
+        controller: controller,
+        keyboardType: keyboardType,
+        obscureText: obscureText,
+        onChanged: onChanged,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: validator,
+        inputFormatters: inputFormatters,
+        decoration: decoration ??
+            InputDecoration(
               prefixIcon: prefixIcon,
+              suffixIcon: suffixIcon,
+              labelText: labelText,
+              hintText: hintText,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(15),
               ),
             ),
-          ),
-        ],
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_1/core/uitils/color_uitils.dart';
-import 'package:project_1/features/addAssignment/pages/addAssignmentpage.dart';
-import 'package:project_1/features/getAssignment/pages/getAssignmentPage.dart'; // <-- Import GetAssignmentPage
+import 'package:project_1/features/assignment/pages/addAssignmentpage.dart';
+import 'package:project_1/features/assignment/pages/getAssignmentpage.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -25,7 +25,7 @@ class DashboardPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AddAssignmentPage()),
+                  MaterialPageRoute(builder: (context) =>  AssignmentPage()),
                 );
               },
               icon: const Icon(Icons.add),

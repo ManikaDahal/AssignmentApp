@@ -1,72 +1,27 @@
-
 import 'package:flutter/material.dart';
-import 'package:project_1/core/uitils/color_uitils.dart';
 
-class CustomElevatedbutton extends StatelessWidget {
-  final FocusNode _focusNode = FocusNode();
+class CustomButton extends StatelessWidget {
   Function()? onPressed;
   Widget? child;
   Color? backgroundColor;
-  Color? foregroundColor;
-  Color? borderColor;
-  double? width;
-  double? height;
-  CustomElevatedbutton(
-      {super.key,
-      required this.onPressed,
-      required this.child,
-      this.height,
-      this.width,
-      this.backgroundColor,
-      this.foregroundColor,
-      this.borderColor});
+  CustomButton({super.key, this.onPressed, this.child, this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: height ?? 50,
-        width: width ?? MediaQuery.of(context).size.width,
-        child: ElevatedButton(
-          focusNode: _focusNode,
-          onPressed: onPressed,
-          style:
-          //  ButtonStyle(
-          //   backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
-          //     if (states.contains(WidgetState.pressed)||states.contains(WidgetState.hovered)|| _focusNode.hasFocus) {
-          //       return primaryColor.withValues(alpha: 0.6);
-          //     }
-          //     return backgroundColor?? primaryColor;
-          //   }),
-          //   foregroundColor:
-          //       WidgetStateProperty.all<Color>(foregroundColor ?? Colors.white),
-          //   textStyle: WidgetStateProperty.all<TextStyle>(
-          //     TextStyle(fontSize: 14),
-          //   ),
-          //   shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-          //     RoundedRectangleBorder(
-          //       side: BorderSide(
-          //         color: borderColor ?? primaryColor,
-          //         width: 1,
-          //       ),
-          //       borderRadius: BorderRadius.circular(10),
-          //     ),
-          //   ),
-          //   elevation: WidgetStateProperty.all<double>(0),
-          // ),
-                ElevatedButton.styleFrom(
-                  elevation: 0,
-                  backgroundColor: backgroundColor?? primaryColor,
-                  foregroundColor:foregroundColor?? Colors.white,
-                  textStyle: TextStyle(fontSize: 14),
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      color: borderColor ??primaryColor,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: SizedBox(
+          height: 50,
+          width: MediaQuery.of(context).size.width * 0.95,
+          child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)
                 ),
-          child: child,
-        ));
+                  backgroundColor: backgroundColor ?? const Color.fromARGB(255, 171, 216, 237)),
+              onPressed: onPressed,
+              child: child)),
+              
+    );
   }
 }

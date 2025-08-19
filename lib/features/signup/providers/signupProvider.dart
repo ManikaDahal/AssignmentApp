@@ -3,7 +3,8 @@ import 'package:project_1/core/uitils/api_const.dart';
 import 'package:project_1/core/uitils/api_response.dart';
 import 'package:project_1/core/uitils/dio_http.dart';
 import 'package:project_1/core/uitils/status_utils.dart';
-import 'package:project_1/core/uitils/user.dart';
+import 'package:project_1/features/login/model/user.dart';
+
 
 class SignupProvider extends ChangeNotifier {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -25,22 +26,23 @@ class SignupProvider extends ChangeNotifier {
   }
 
   Future<void> submitForm() async {
+    setSignupStatus( StatusUtils.loading);
     User user = User(
       username: usernameController.text,
+      gender: selectedGender,
       email: emailController.text,
       password: passwordController.text,
       contact: contactController.text,
-      gender: selectedGender,
       role: selectedRole,
     );
-    ApiResponse response = await postData(Api.UserFormPage, user.toJson());
+    ApiResponse response = await postData(Api.userFormPage, user.toJson());
     if (response.statusUtil == StatusUtils.success) {
       setSignupStatus( StatusUtils.success);
-      // Handle success, e.g., show a success message or navigate to another page
+     
     } else {
       setSignupStatus( StatusUtils.error);
-      // Handle error, e.g., show an error message
+     
     }
-    // Handle response here
+   
   }
 }

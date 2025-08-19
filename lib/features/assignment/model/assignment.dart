@@ -1,4 +1,5 @@
 class Assignment {
+  int? id;
   String? subjectName;
   String? semester;
   String? faculty;
@@ -9,10 +10,12 @@ class Assignment {
       {this.subjectName,
       this.semester,
       this.faculty,
+      this.id,
       this.title,
       this.description});
 
   Assignment.fromJson(Map<String, dynamic> json) {
+    id=json['id'];
     subjectName = json['subjectName'];
     semester = json['semester'];
     faculty = json['faculty'];
@@ -27,6 +30,7 @@ class Assignment {
     data['faculty'] = this.faculty;
     data['title'] = this.title;
     data['description'] = this.description;
+    data['id']=this.id;
     return data;
   }
 }

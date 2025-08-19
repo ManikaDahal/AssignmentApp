@@ -66,4 +66,66 @@ Future<ApiResponse> getData(String url,{String? token}) async {
 }
 
 
+/// DELETE request
+Future<ApiResponse> deleteData(String url, {String? token}) async {
+  try {
+    if (token != null) {
+      dio.options.headers['Authorization'] = 'Bearer $token';
+    }
+
+    final response = await dio.delete(url);
+
+    if (response.statusCode == 200 || response.statusCode == 204) {
+      return ApiResponse(
+        statusUtil: StatusUtils.success,
+        data: response.data,
+      );
+    } else {
+      return ApiResponse(
+        statusUtil: StatusUtils.error,
+        errorMessage: 'Unexpected status code: ${response.statusCode}',
+      );
+    }
+  } catch (e) {
+    return ApiResponse(
+      statusUtil: StatusUtils.error,
+      errorMessage: e.toString(),
+    );
+  }
+}
+
+
+/// PUT (edit/update) request
+Future<ApiResponse> editData(String url, Map<String, dynamic> body,
+    {String? token}) async {
+  try {
+    if (token != null) {
+      dio.options.headers['Authorization'] = 'Bearer $token';
+    }
+
+    final response = await dio.patch(url, data: body);
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return ApiResponse(
+        statusUtil: StatusUtils.success,
+        data: response.data,
+      );
+    } else {
+      return ApiResponse(
+        statusUtil: StatusUtils.error,
+        errorMessage: 'Unexpected status code: ${response.statusCode}',
+      );
+    }
+  } catch (e) {
+    return ApiResponse(
+      statusUtil: StatusUtils.error,
+      errorMessage: e.toString(),
+    );
+  }
+}
+
+
+
+
+
 
